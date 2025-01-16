@@ -1,7 +1,6 @@
 # Setting up a device (pi) as a VPN that uses routes traffic through NordVPN
 
-Install Docker:
-- https://docs.docker.com/engine/install/ubuntu
+Install Docker: https://docs.docker.com/engine/install/ubuntu
 
 Docker Services:
 
@@ -11,5 +10,4 @@ Docker Services:
 
 - https://github.com/pi-hole/docker-pi-hole
 
-Free up port 53:
-- https://github.com/pi-hole/docker-pi-hole?tab=readme-ov-file#installing-on-ubuntu-or-fedora
+Free up port 53: https://github.com/pi-hole/docker-pi-hole?tab=readme-ov-file#installing-on-ubuntu-or-fedora
