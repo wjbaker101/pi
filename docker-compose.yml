@@ -1,0 +1,46 @@
+services:
+  vpn:
+    container_name: vpn
+    image: ghcr.io/bubuntux/nordvpn
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    env_file: env/vpn.env
+    ports:
+      - 51820:51820/udp
+      - 51821:51821/tcp
+      - 53:53/tcp
+      - 53:53/udp
+      - 8061:8061/tcp
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=1
+    restart: unless-stopped
+  wg:
+    container_name: wg
+    image: ghcr.io/wg-easy/wg-easy
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    env_file: env/wg.env
+    volumes:
+      - /path/to/wireguard/config:/config
+      - /lib/modules:/lib/modules
+    sysctls:
+      - net.ipv4.ip_forward=1
+      - net.ipv4.conf.all.src_valid_mark=1
+    restart: unless-stopped
+    network_mode: service:vpn
+    depends_on:
+      - vpn
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    env_file: env/pihole.env
+    volumes:
+      - './etc-pihole:/etc/pihole'
+      - './etc-dnsmasq.d:/etc/dnsmasq.d'
+    restart: unless-stopped
+    network_mode: service:vpn
+    depends_on:
+      - vpn
+
