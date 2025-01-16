@@ -10,3 +10,6 @@ Docker Services:
 - https://github.com/wg-easy/wg-easy
 
 - https://github.com/pi-hole/docker-pi-hole
+
+Free up port 53:
+- https://github.com/pi-hole/docker-pi-hole?tab=readme-ov-file#installing-on-ubuntu-or-fedora
